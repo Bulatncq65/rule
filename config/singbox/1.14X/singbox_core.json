@@ -47,32 +47,29 @@
     {"tag": "自动选择", "type": "urltest", "outbounds": [], "url": "https://clients1.google.com/generate_204", "interval": "30m", "tolerance": 100},
     {"tag": "延迟辅助", "type": "urltest", "outbounds": ["直连"], "url": "http://connect.rom.miui.com/generate_204", "interval": "30m"},
     {"tag": "GLOBAL", "type": "selector", "outbounds": ["默认代理", "AI", "YouTube", "Google", "Telegram", "TikTok", "Netflix", "Wallet", "Steam", "Microsoft", "OneDrive", "Apple", "漏网之鱼", "日本手动", "狮城手动", "香港手动", "美国手动", "手动选择", "自动选择", "延迟辅助", "直连"]},
-    {"tag": "直连", "type": "direct", "domain_resolver": "ali"}
+    {"tag": "直连", "type": "direct", "domain_resolver": "ali"},
+    {"tag": "bridge-out","type": "bridge","interface": "br-lan"}
   ],
   "http_clients": [
     {"tag": "直连下载", "detour": "直连"}
   ],
   "route": {
-	"find_process": true,
     "rules": [
-
   {"type": "logical", "mode": "and", "rules": [{"port": [53, 853], "invert": true}, {"clash_mode": "Global", "invert": true}, {"type": "logical", "mode": "or", "rules": [{"ip_is_private": true}, {"rule_set": "geoip-cn"}]}], "action": "bypass"},
-  
 
   {"ip_cidr": ["17.0.0.0/8"], "action": "bypass"},
   {"ip_cidr": ["fd7a:115c:a1e0::/48"], "action": "bypass"},
-  {"process_path": ["/usr/bin/easytier-core (root)"], "action": "bypass"}, 
-  {"process_path": ["/usr/sbin/tailscaled (root)"], "action": "bypass"},
-  {"domain_keyword": ["tailscale"], "action": "bypass"},
-  {"domain_keyword": ["board.zash"], "action": "bypass"},
-  {"domain_keyword": ["metacubex"], "action": "bypass"},
-  {"type": "logical", "mode": "and", "rules": [{"port": [123,3478,41641]}, {"network": "udp"}], "action": "bypass"},
+  {"ip_is_private": true, "action": "bypass"},
+  {"type": "logical", "mode": "and", "rules": [{"port": [123,41641]}, {"network": "udp"}], "action": "bypass"},
   {"type": "logical", "mode": "and", "rules": [{"port": [3478,5228]}, {"network": "tcp"}], "action": "bypass"},
-
+  {"process_name": ["easytier-core"], "outbound": "直连"},
+  {"process_name": ["tailscaled"],"outbound": "直连"},
+  {"domain_keyword": ["tailscale"], "outbound": "直连"},
+  {"domain_keyword": ["board.zash"], "outbound": "直连"},
+  {"domain_keyword": ["metacubex"], "outbound": "直连"},
 
   {"type": "logical", "mode": "or", "rules": [{"domain_suffix": "push.apple.com"}, {"rule_set": "geoip-telegram"}], "invert": true, "action": "sniff", "sniffer": ["http", "tls", "stun", "quic", "dns"], "timeout": "100ms"},
   {"type": "logical", "mode": "or", "rules": [{"port": 53}, {"protocol": "dns"}], "action": "hijack-dns"},
-  {"ip_is_private": true, "action": "bypass"},
   {"type": "logical", "mode": "or", "rules": [{"port": 853}, {"protocol": ["stun", "quic"]}], "action": "reject", "no_drop": true},
   {"network": "icmp", "action": "resolve"},
   {"network": "icmp", "action": "bypass"},
@@ -86,13 +83,13 @@
   {"domain_suffix": ["github.com","speedtest.net","googletagmanager.com","adobe.com","amazon.com","zoom.com", "zoom.com.cn", "zoom.us"], "outbound": "默认代理"},
   {"domain_suffix": ["immersivetranslate.com","onetrust.com","hubspotonwebflow.com","playstation.net","tripo3d.ai"], "outbound": "默认代理"},
 
-  {"domain_suffix": ["npm.community","npmjs.com","npmjs.org"], "action": "bypass"},
-  {"rule_set": "geosite-akamai", "action": "bypass"},
-  {"rule_set": "geosite-private", "action": "bypass"},
-  {"rule_set": "geosite-apple@cn", "action": "bypass"},
-  {"rule_set": "geosite-microsoft@cn", "action": "bypass"},
-  {"rule_set": "geosite-steam@cn", "action": "bypass"},
-  {"rule_set": "geosite-category-games@cn", "action": "bypass"},
+  {"domain_suffix": ["npm.community","npmjs.com","npmjs.org"], "outbound": "直连"},
+  {"rule_set": "geosite-akamai","outbound": "直连"},
+  {"rule_set": "geosite-private", "outbound": "直连"},
+  {"rule_set": "geosite-apple@cn", "outbound": "直连"},
+  {"rule_set": "geosite-microsoft@cn","outbound": "直连"},
+  {"rule_set": "geosite-steam@cn", "outbound": "直连"},
+  {"rule_set": "geosite-category-games@cn","outbound": "直连"},
   {"rule_set": "geosite-category-ai-!cn", "outbound": "AI"},
   {"rule_set": "geosite-youtube", "outbound": "YouTube"},
   {"rule_set": "geosite-onedrive", "outbound": "OneDrive"},
@@ -111,17 +108,21 @@
   {"rule_set": "geosite-gfw", "outbound": "默认代理"},
   {"inbound": ["mixed-in"], "action": "resolve"},
   {"rule_set": "geoip-telegram", "outbound": "Telegram"},
-  {"ip_cidr": ["52.182.141.63/32","31.13.92.0/24"], "outbound": "默认代理"},
-  {"rule_set": "geoip-cn", "action": "bypass"}
+  {"rule_set": ["geoip-cn-sagernet","geoip-cn-metacubex","geoip-cn-loyalsoldier"], "action": "bypass"}
+  {"source_ip_cidr": ["100.64.0.0/10"], "outbound": "默认代理"},
+  {"inbound": "tun-in", "preferred_by": ["bridge-out"], "outbound": "bridge-out"}
     ],
     "rule_set": [
       {"tag": ["geosite-gfw","geosite-category-games@cn","geosite-google-gemini","geosite-stripe","geosite-akamai"], "type": "remote", "format": "binary", "url": "https://gh-proxy.com/https://raw.githubusercontent.com/2dust/sing-box-rules/rule-set-geosite/{tag}.srs"},
       {"tag": ["geosite-category-ai-!cn", "geosite-youtube", "geosite-onedrive", "geosite-microsoft", "geosite-microsoft@cn","geosite-apple", "geosite-apple@cn", "geosite-telegram", "geosite-tiktok", "geosite-netflix", "geosite-paypal", "geosite-binance", "geosite-okx", "geosite-category-cryptocurrency", "geosite-steam@cn", "geosite-steam", "geosite-geolocation-!cn", "geosite-cn", "geosite-private"], "type": "remote", "format": "binary", "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/{tag}.srs"},
       {"tag": ["fakeipfilter-cn", "fakeipfilter-!cn"], "type": "remote", "format": "source", "url": "https://gh-proxy.com/https://raw.githubusercontent.com/qichiyuhub/rule/refs/heads/main/rules/{tag}.json"},
       {"tag": "geoip-telegram", "type": "remote", "format": "binary", "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/telegram.srs"},
-      {"tag": "geoip-cn", "type": "remote", "format": "binary", "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs"}
+      {"tag": "geoip-cn-sagernet", "type": "remote", "format": "binary", "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs"},
+      {"tag": "geoip-cn-metacubex", "type": "remote", "format": "binary", "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/cn.srs"},
+      {"tag": "geoip-cn-loyalsoldier", "type": "remote", "format": "binary", "url": "https://cdn.jsdelivr.net/gh/Loyalsoldier/geoip@release/srs/cn.srs"}
     ],
     "final": "漏网之鱼",
+    "find_process": true,
     "default_http_client": "直连下载",
     "auto_detect_interface": true,
     "default_domain_resolver": {"server": "ali"}
