@@ -16,7 +16,7 @@
       {"rule_set": ["fakeipfilter-cn", "geosite-cn", "geosite-microsoft@cn", "geosite-apple@cn", "geosite-private"], "server": "ali"},
       {"rule_set": "fakeipfilter-!cn", "server": "google"},
       {"type": "logical", "mode": "and", "rules": [{"query_type": ["A", "AAAA"]}, {"rule_set": "geosite-geolocation-!cn", "invert": true}], "action": "evaluate", "server": "google", "client_subnet": "223.5.5.0/24","timeout": "2s"},
-      {"match_response": true, "rule_set": "geoip-cn", "server": "ali"},
+      {"match_response": true, "rule_set": ["geoip-cn-sagernet", "geoip-cn-metacubex", "geoip-cn-loyalsoldier"], "server": "ali"}, 
       {"query_type": ["A", "AAAA"], "server": "fakeip", "rewrite_ttl": 1}
     ],
     "final": "google",
@@ -54,7 +54,7 @@
   ],
   "route": {
     "rules": [
-  {"type": "logical", "mode": "and", "rules": [{"port": [53, 853], "invert": true}, {"clash_mode": "Global", "invert": true}, {"type": "logical", "mode": "or", "rules": [{"ip_is_private": true}, {"rule_set": "geoip-cn"}]}], "action": "bypass"},
+  {"type": "logical", "mode": "and", "rules": [{"port": [53, 853], "invert": true}, {"clash_mode": "Global", "invert": true}, {"type": "logical", "mode": "or", "rules": [{"ip_is_private": true}, {"rule_set": ["geoip-cn-sagernet", "geoip-cn-metacubex", "geoip-cn-loyalsoldier"]}]}], "action": "bypass"},
 
   {"ip_cidr": ["17.0.0.0/8"], "action": "bypass"},
   {"ip_cidr": ["fd7a:115c:a1e0::/48"], "action": "bypass"},
@@ -107,9 +107,7 @@
   {"rule_set": "geosite-gfw", "outbound": "默认代理"},
   {"inbound": ["mixed-in"], "action": "resolve"},
   {"rule_set": "geoip-telegram", "outbound": "Telegram"},
-  {"rule_set": "geoip-cn-sagernet", "action": "bypass"},
-  {"rule_set": "geoip-cn-metacubex", "action": "bypass"},
-  {"rule_set": "geoip-cn-loyalsoldier", "action": "bypass"},
+  {"rule_set": ["geoip-cn-sagernet", "geoip-cn-metacubex", "geoip-cn-loyalsoldier"], "action": "bypass"},
   {"source_ip_cidr": ["100.64.0.0/10"], "outbound": "默认代理"}
     ],
     "rule_set": [
