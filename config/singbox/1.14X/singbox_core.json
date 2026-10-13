@@ -108,7 +108,7 @@
   {"rule_set": "geosite-gfw", "outbound": "默认代理"},
   {"inbound": ["mixed-in"], "action": "resolve"},
   {"rule_set": "geoip-telegram", "outbound": "Telegram"},
-  {"rule_set": ["geoip-cn-sagernet","geoip-cn-metacubex"], "action": "bypass"}
+  {"rule_set": ["geoip-cn-sagernet","geoip-cn-metacubex"], "action": "bypass"},
   {"source_ip_cidr": ["100.64.0.0/10"], "outbound": "默认代理"},
   {"inbound": "tun-in", "preferred_by": ["bridge-out"], "outbound": "bridge-out"}
     ],
