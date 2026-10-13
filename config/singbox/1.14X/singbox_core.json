@@ -118,7 +118,7 @@
       {"tag": ["fakeipfilter-cn", "fakeipfilter-!cn"], "type": "remote", "format": "source", "url": "https://gh-proxy.com/https://raw.githubusercontent.com/qichiyuhub/rule/refs/heads/main/rules/{tag}.json"},
       {"tag": "geoip-telegram", "type": "remote", "format": "binary", "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/telegram.srs"},
       {"tag": "geoip-cn-sagernet", "type": "remote", "format": "binary", "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs"},
-      {"tag": "geoip-cn-metacubex", "type": "remote", "format": "binary", "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/cn.srs"},
+      {"tag": "geoip-cn-metacubex", "type": "remote", "format": "binary", "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/cn.srs"}
     ],
     "final": "漏网之鱼",
     "find_process": true,
