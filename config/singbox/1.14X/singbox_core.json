@@ -108,7 +108,7 @@
   {"rule_set": "geosite-stripe", "outbound": "默认代理"},
   {"rule_set": "geosite-google-gemini", "outbound": "Google"},
   {"rule_set": "geosite-gfw", "outbound": "默认代理"},
-  {"inbound": ["tun-in"], "action": "bypass"},
+  {"inbound": ["mixed-in"], "action": "resolve"},
   {"rule_set": "geoip-telegram", "outbound": "Telegram"},
   {"ip_cidr": ["52.182.141.63/32","31.13.92.0/24"], "outbound": "默认代理"},
   {"rule_set": "geoip-cn", "action": "bypass"}
