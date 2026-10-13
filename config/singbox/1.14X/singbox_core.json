@@ -108,7 +108,9 @@
   {"rule_set": "geosite-gfw", "outbound": "默认代理"},
   {"inbound": ["mixed-in"], "action": "resolve"},
   {"rule_set": "geoip-telegram", "outbound": "Telegram"},
-  {"rule_set": ["geoip-cn-sagernet","geoip-cn-metacubex"], "action": "bypass"},
+  {"rule_set": ["geoip-cn-sagernet"], "action": "bypass"},
+  {"rule_set": ["geoip-cn-metacubex"], "action": "bypass"},
+  {"rule_set": ["geoip-cn-loyalsoldier"], "action": "bypass"},
   {"source_ip_cidr": ["100.64.0.0/10"], "outbound": "默认代理"},
   {"inbound": "tun-in", "preferred_by": ["bridge-out"], "outbound": "bridge-out"}
     ],
@@ -118,7 +120,8 @@
       {"tag": ["fakeipfilter-cn", "fakeipfilter-!cn"], "type": "remote", "format": "source", "url": "https://gh-proxy.com/https://raw.githubusercontent.com/qichiyuhub/rule/refs/heads/main/rules/{tag}.json"},
       {"tag": "geoip-telegram", "type": "remote", "format": "binary", "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/telegram.srs"},
       {"tag": "geoip-cn-sagernet", "type": "remote", "format": "binary", "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs"},
-      {"tag": "geoip-cn-metacubex", "type": "remote", "format": "binary", "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/cn.srs"}
+      {"tag": "geoip-cn-metacubex", "type": "remote", "format": "binary", "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/cn.srs"},
+      {"tag": "geoip-cn-loyalsoldier", "type": "remote", "format": "binary", "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Loyalsoldier/geoip/release/srs/cn.srs"}
     ],
     "final": "漏网之鱼",
     "find_process": true,
