@@ -60,8 +60,8 @@
 
   {"ip_cidr": ["17.0.0.0/8"], "action": "bypass"},
   {"ip_cidr": ["fd7a:115c:a1e0::/48"], "action": "bypass"},
-  {"process_path": ["^/usr/bin/easytier-core.+"], "action": "bypass"}, 
-  {"process_path": ["^/usr/sbin/tailscaled.+"], "action": "bypass"},
+  {"process_path_regex": ["^/usr/bin/easytier-core.+"], "action": "bypass"}, 
+  {"process_path_regex": ["^/usr/sbin/tailscaled.+"], "action": "bypass"},
   {"domain_keyword": ["tailscale"], "action": "bypass"},
   {"domain_keyword": ["board.zash"], "action": "bypass"},
   {"domain_keyword": ["metacubex"], "action": "bypass"},
