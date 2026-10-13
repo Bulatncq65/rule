@@ -123,6 +123,7 @@
     "final": "漏网之鱼",
     "default_http_client": "直连下载",
     "auto_detect_interface": true,
+	"find_process": true,
     "default_domain_resolver": {"server": "ali"}
   },
   "inbounds": [
