@@ -108,7 +108,7 @@
       {"rule_set": "geoip-telegram", "outbound": "Telegram"},
       {"rule_set": ["geoip-cn-sagernet", "geoip-cn-metacubex", "geoip-cn-loyalsoldier"], "action": "bypass"},
       {"source_ip_cidr": ["100.64.0.0/10"], "outbound": "默认代理"},
-	  {"inbound": "mixed-in", "preferred_by": ["bridge-out"], "outbound": "bridge-out" } 
+      {"inbound": "mixed-in", "preferred_by": ["bridge-out"], "outbound": "bridge-out" } 
     ],
     "rule_set": [
       {"tag": ["geosite-gfw","geosite-category-games@cn","geosite-google-gemini","geosite-stripe","geosite-akamai"], "type": "remote", "format": "binary", "url": "https://gh-proxy.com/https://raw.githubusercontent.com/2dust/sing-box-rules/rule-set-geosite/{tag}.srs"},
