@@ -63,7 +63,7 @@
       {"type": "logical", "mode": "and", "rules": [{"port": [123,41641]}, {"network": "udp"}], "action": "bypass"},
       {"type": "logical", "mode": "and", "rules": [{"port": [3478,5228]}, {"network": "tcp"}], "action": "bypass"},
       {"process_path_regex": [".*easytier.*"], "outbound": "直连"},
-      {"process_path_regex": [".*tailscaled.*"], "outbound": "直连"},
+      {"process_path_regex": [".*tailscale.*"], "outbound": "直连"},
       {"domain_keyword": ["tailscale"], "outbound": "直连"},
       {"domain_keyword": ["board.zash"], "outbound": "直连"},
       {"domain_keyword": ["metacubex"], "outbound": "直连"},
