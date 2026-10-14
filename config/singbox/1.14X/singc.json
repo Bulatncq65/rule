@@ -21,7 +21,7 @@
     ],
     "final": "google",
     "strategy": "prefer_ipv4", 
-    "cache_capacity": 32768,
+    "cache_capacity": 16384,
     "optimistic": {"enabled": true},
     "reverse_mapping": true
   },
