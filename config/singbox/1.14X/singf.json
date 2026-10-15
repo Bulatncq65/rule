@@ -87,6 +87,7 @@
       {"rule_set": "geosite-microsoft@cn","outbound": "直连"},
       {"rule_set": "geosite-steam@cn", "outbound": "直连"},
       {"rule_set": "geosite-category-games@cn","outbound": "直连"},
+      {"rule_set": "geosite-category-ai-cn", "outbound": "直连"},
       {"rule_set": "geosite-category-ai-!cn", "outbound": "AI"},
       {"rule_set": "geosite-youtube", "outbound": "YouTube"},
       {"rule_set": "geosite-onedrive", "outbound": "OneDrive"},
@@ -110,7 +111,7 @@
       {"inbound": "tun-in", "preferred_by": ["bridge-out"], "outbound": "bridge-out" } 
     ],
     "rule_set": [
-      {"tag": ["geosite-gfw","geosite-category-games@cn","geosite-google-gemini","geosite-stripe","geosite-akamai"], "type": "remote", "format": "binary", "url": "https://gh-proxy.com/https://raw.githubusercontent.com/2dust/sing-box-rules/rule-set-geosite/{tag}.srs"},
+      {"tag": ["geosite-gfw","geosite-category-ai-cn","geosite-category-games@cn","geosite-google-gemini","geosite-stripe","geosite-akamai"], "type": "remote", "format": "binary", "url": "https://gh-proxy.com/https://raw.githubusercontent.com/2dust/sing-box-rules/rule-set-geosite/{tag}.srs"},
       {"tag": ["geosite-category-ai-!cn", "geosite-youtube", "geosite-onedrive", "geosite-microsoft", "geosite-microsoft@cn","geosite-apple", "geosite-apple@cn", "geosite-telegram", "geosite-tiktok", "geosite-netflix", "geosite-paypal", "geosite-binance", "geosite-okx", "geosite-category-cryptocurrency", "geosite-steam@cn", "geosite-steam", "geosite-geolocation-!cn", "geosite-cn", "geosite-private"], "type": "remote", "format": "binary", "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/{tag}.srs"},
       {"tag": ["fakeipfilter-cn", "fakeipfilter-!cn"], "type": "remote", "format": "source", "url": "https://gh-proxy.com/https://raw.githubusercontent.com/qichiyuhub/rule/refs/heads/main/rules/{tag}.json"},
       {"tag": "geoip-telegram", "type": "remote", "format": "binary", "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/telegram.srs"},
